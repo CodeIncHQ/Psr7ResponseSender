@@ -21,10 +21,10 @@ $sender->send($response);
 
 ## Installation
 
-This library is available through [Packagist](https://packagist.org/packages/codeinchq/lib-psr7responsesenders) and can be installed using [Composer](https://getcomposer.org/): 
+This library is available through [Packagist](https://packagist.org/packages/codeinchq/lib-psr7responsesender) and can be installed using [Composer](https://getcomposer.org/): 
 
 ```bash
-composer require codeinchq/lib-psr7responsesenders
+composer require codeinchq/lib-psr7responsesender
 ```
 
 
