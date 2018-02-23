@@ -1,8 +1,8 @@
 {
-  "name": "codeinchq/lib-psr7responsesenders",
+  "name": "codeinchq/lib-psr7responsesender",
   "version": "1.0.0",
   "description": "Code Inc. PSR7 response senders",
-  "homepage": "https://github.com/CodeIncHQ/lib-psr7responsesenders",
+  "homepage": "https://github.com/CodeIncHQ/lib-psr7responsesender",
   "type": "library",
   "license": "MIT",
   "require": {
@@ -19,10 +19,10 @@
     "hansott/psr7-cookies": "Allows to add cookies into a PSR7 response"
   },
   "autoload": {
-    "psr-4": {"CodeInc\\PSR7ResponSenders\\": "src/"}
+    "psr-4": {"CodeInc\\PSR7ResponseSender\\": "src/"}
   },
   "autoload-dev": {
-    "psr-4": { "CodeInc\\PSR7ResponSenders\\Tests\\": "tests/" }
+    "psr-4": { "CodeInc\\PSR7ResponseSender\\Tests\\": "tests/" }
   },
   "authors": [
     {

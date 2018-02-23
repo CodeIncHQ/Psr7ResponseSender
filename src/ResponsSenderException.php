@@ -17,17 +17,17 @@
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     23/02/2018
 // Time:     13:48
-// Project:  lib-router
+// Project:  lib-psr7responsesenders
 //
 declare(strict_types = 1);
-namespace CodeInc\PSR7ResponSenders;
+namespace CodeInc\PSR7ResponseSender;
 use Throwable;
 
 
 /**
  * Class ResponsSenderException
  *
- * @package CodeInc\Router\ResponseSender\Exceptions
+ * @package CodeInc\PSR7ResponseSender
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
 class ResponsSenderException extends \Exception {

@@ -17,10 +17,10 @@
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     23/02/2018
 // Time:     13:44
-// Project:  lib-router
+// Project:  lib-psr7responsesenders
 //
 declare(strict_types = 1);
-namespace CodeInc\PSR7ResponSenders;
+namespace CodeInc\PSR7ResponseSender;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -28,7 +28,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * Class SimpleResponseSender
  *
- * @package CodeInc\Router\ResponseSender
+ * @package CodeInc\PSR7ResponseSender
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
 class SimpleResponseSender implements ResponseSenderInterface {
@@ -42,7 +42,7 @@ class SimpleResponseSender implements ResponseSenderInterface {
 	{
 		// checking if a reponse is sent
 		if (headers_sent()) {
-			throw new ResponsSenderException("A response have already been sent to the web browser",
+			throw new ResponsSenderException("A response has already been sent to the web browser",
 				$this);
 		}
 
