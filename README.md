@@ -1,8 +1,9 @@
 # PSR7 response sender
 
-The library provides responders (most of them are currently under developpement) to stream [PSR7](https://www.php-fig.org/psr/psr-7/) [responses](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface) to a web browser. It provides a standard interface `ResponseSenderInterface` for PSR7 reponse senders. A response sender is capable of sending anything implementing the PSR7 [`ResponseInterface`](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface).
- 
-This library is a companion to the [`lib-router`](https://github.com/CodeIncHQ/lib-router). 
+This library is a companion to the [`lib-router`](https://github.com/CodeIncHQ/lib-router) written in PHP 7. It provides a responder to stream [PSR7](https://www.php-fig.org/psr/psr-7/) [responses](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface) to a web browser. It provides a standard interface `ResponseSenderInterface` for PSR-7 reponse senders. A response sender is capable of sending anything implementing the PSR7 [`ResponseInterface`](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface).
+
+The library also provides the `HttpVersionCheckMiddleware` middleware to insure the response will be sent using the same version of the HTTP protocol as the request.
+
 
 ## Usage
 
@@ -30,8 +31,9 @@ composer require codeinchq/lib-psr7responsesenders
 
 ## Dependencies 
 
-* this library requires [PHP 7.2](http://php.net/releases/7_2_0.php)
-* it is using [`psr/http-message`](https://packagist.org/packages/psr/http-message) for the standard PSR7 objects interfaces ;
+* [PHP 7.2](http://php.net/releases/7_2_0.php)
+* [`psr/http-message`](https://packagist.org/packages/psr/http-message) for the standard PSR-7 objects interfaces ;
+* [`psr/http-server-middleware`](https://packagist.org/packages/psr/http-server-middleware) for the PSR-15 middleware interface ;
 
 **Recommended library:**
 * the [`hansott/psr7-cookies`](https://packagist.org/packages/hansott/psr7-cookies) library is strongly recommended to add cookies to the PSR7 responses.
