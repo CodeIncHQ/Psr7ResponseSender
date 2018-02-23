@@ -1,6 +1,8 @@
-# Code Inc. PSR7 response sender
+# PSR7 response sender
 
-The library provides responders (most of the m currently under developpement) for stream [PSR7](https://www.php-fig.org/psr/psr-7/) [responses](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface) to a web browser. It is a companion to the [`lib-router`](https://github.com/CodeIncHQ/lib-router). 
+The library provides responders (most of them are currently under developpement) to stream [PSR7](https://www.php-fig.org/psr/psr-7/) [responses](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface) to a web browser. It provides a standard interface `ResponseSenderInterface` for PSR7 reponse senders. A reponse sender is capable of sending any PSR7 response implementing the [`ResponseInterface`](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface).
+ 
+ It is a companion to the [`lib-router`](https://github.com/CodeIncHQ/lib-router). 
 
 ## Usage
 
