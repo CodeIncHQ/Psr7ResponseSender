@@ -38,5 +38,5 @@ interface ResponseSenderInterface {
 	 * @param ResponseInterface $response
 	 * @param RequestInterface $request
 	 */
-	public function sendResponse(ResponseInterface $response, ?RequestInterface $request = null):void;
+	public function send(ResponseInterface $response, ?RequestInterface $request = null):void;
 }

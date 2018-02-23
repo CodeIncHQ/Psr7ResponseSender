@@ -38,7 +38,7 @@ class ResponseSender implements ResponseSenderInterface {
 	 * @param null|RequestInterface $request
 	 * @throws ResponsSenderException
 	 */
-	public function sendResponse(ResponseInterface $response, ?RequestInterface $request = null):void
+	public function send(ResponseInterface $response, ?RequestInterface $request = null):void
 	{
 		// making the response compatible with the request
 		if ($request && $response->getProtocolVersion() != $request->getProtocolVersion()) {
