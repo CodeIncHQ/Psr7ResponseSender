@@ -2,10 +2,7 @@
 
 This library is a companion to the [`lib-router`](https://github.com/CodeIncHQ/lib-router) written in PHP 7. It provides the `ResponseSender` responder to stream [PSR-7](https://www.php-fig.org/psr/psr-7/) [responses](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface) to a web browser and the interface `ResponseSenderInterface` for PSR-7 reponse senders. 
 
-A response sender is capable of sending anything implementing the PSR-7 [`ResponseInterface`](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface).
-
-The library also provides the `HttpVersionCheckMiddleware` [PSR-15](https://www.php-fig.org/psr/psr-15/) middleware to insure the response will be sent using the same version of the HTTP protocol as the request.
-
+A response sender is capable of streaming anything implementing the PSR-7 [`ResponseInterface`](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface).
 
 ## Usage
 
@@ -34,8 +31,7 @@ composer require codeinchq/lib-psr7responsesenders
 ## Dependencies 
 
 * [PHP 7.2](http://php.net/releases/7_2_0.php)
-* [`psr/http-message`](https://packagist.org/packages/psr/http-message) for the standard PSR-7 objects interfaces ;
-* [`psr/http-server-middleware`](https://packagist.org/packages/psr/http-server-middleware) for the PSR-15 middleware interface ;
+* [`psr/http-message`](https://packagist.org/packages/psr/http-message) for the standard PSR-7 objects interfaces 
 
 **Recommended library:**
 * the [`hansott/psr7-cookies`](https://packagist.org/packages/hansott/psr7-cookies) library is strongly recommended to add cookies to the PSR-7 responses.
