@@ -8,14 +8,14 @@ This library is a companion to the [`lib-router`](https://github.com/CodeIncHQ/l
 
 ```php
 <?php
-use CodeInc\PSR7ResponseSender\SimpleResponseSender;
+use CodeInc\PSR7ResponseSender\ResponseSender;
 use GuzzleHttp\Psr7\Response;
 
 // a response can be anything implementing ResponseInterface, here the Guzzle implementation
 $response = new Response();
 
 // sends the response to the web browser
-$sender = new SimpleResponseSender();
+$sender = new ResponseSender();
 $sender->send($response);
 ```
 
