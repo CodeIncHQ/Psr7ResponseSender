@@ -27,7 +27,7 @@ use Throwable;
 /**
  * Class ResponsSenderException
  *
- * @package CodeInc\PSR7ResponseSender
+ * @package CodeInc\Psr7ResponseSender
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
 class ResponsSenderException extends \Exception {

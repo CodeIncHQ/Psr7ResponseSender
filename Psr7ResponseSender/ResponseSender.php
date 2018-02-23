@@ -21,31 +21,21 @@
 //
 declare(strict_types = 1);
 namespace CodeInc\Psr7ResponseSender;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-
 
 /**
  * Class ResponseSender
  *
- * @package CodeInc\PSR7ResponseSender
+ * @package CodeInc\Psr7ResponseSender
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
 class ResponseSender implements ResponseSenderInterface {
 	/**
 	 * @inheritdoc
-	 * @param ResponseInterface $response
-	 * @param null|RequestInterface $request
 	 * @throws ResponsSenderException
 	 */
-	public function send(ResponseInterface $response, ?RequestInterface $request = null):void
+	public function send(ResponseInterface $response):void
 	{
-		// making the response compatible with the request
-		if ($request && $response->getProtocolVersion() != $request->getProtocolVersion()) {
-			$response = $response->withProtocolVersion($request->getProtocolVersion());
-		}
-
-		// sending the headers
 		$this->sendResponseHeaders($response);
 		$this->sendReponseBody($response);
 	}
@@ -80,9 +70,6 @@ class ResponseSender implements ResponseSenderInterface {
 	protected function sendReponseBody(ResponseInterface $response):void
 	{
 		$body = $response->getBody();
-		if (!$response->hasHeader("Content-Length") && ($size = $body->getSize()) !== null) {
-			header("Content-Length: $size");
-		}
 		while (!$body->eof()) {
 			if ($line = \GuzzleHttp\Psr7\readline($body, 1024)) {
 				echo $line;
