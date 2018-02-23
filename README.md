@@ -1,17 +1,17 @@
 # PSR7 response sender
 
-The library provides responders (most of them are currently under developpement) to stream [PSR7](https://www.php-fig.org/psr/psr-7/) [responses](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface) to a web browser. It provides a standard interface `ResponseSenderInterface` for PSR7 reponse senders. A reponse sender is capable of sending any PSR7 response implementing the [`ResponseInterface`](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface).
+The library provides responders (most of them are currently under developpement) to stream [PSR7](https://www.php-fig.org/psr/psr-7/) [responses](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface) to a web browser. It provides a standard interface `ResponseSenderInterface` for PSR7 reponse senders. A response sender is capable of sending anything implementing the PSR7 [`ResponseInterface`](https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface).
  
- It is a companion to the [`lib-router`](https://github.com/CodeIncHQ/lib-router). 
+This library is a companion to the [`lib-router`](https://github.com/CodeIncHQ/lib-router). 
 
 ## Usage
 
 ```php
 <?php
-use CodeInc\PSR7ResponSenders\SimpleResponseSender;
+use CodeInc\PSR7ResponseSender\SimpleResponseSender;
 use GuzzleHttp\Psr7\Response;
 
-// response can be anything implementing ResponseInterface
+// a response can be anything implementing ResponseInterface, here the Guzzle implementation
 $response = new Response();
 
 // sends the response to the web browser
