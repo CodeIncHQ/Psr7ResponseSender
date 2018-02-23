@@ -30,4 +30,4 @@ $request = \GuzzleHttp\Psr7\ServerRequest::fromGlobals();
 $handler = $router->getRequestHandler(\GuzzleHttp\Psr7\ServerRequest::fromGlobals());
 $response = $router->process($request, $handler);
 
-(new \CodeInc\PSR7ResponseSender\SimpleResponseSender())->send($response, $request);
+(new \CodeInc\PSR7ResponseSender\ResponseSender())->sendResponse($response, $request);

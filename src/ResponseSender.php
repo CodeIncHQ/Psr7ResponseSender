@@ -26,26 +26,20 @@ use Psr\Http\Message\ResponseInterface;
 
 
 /**
- * Class SimpleResponseSender
+ * Class ResponseSender
  *
  * @package CodeInc\PSR7ResponseSender
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class SimpleResponseSender implements ResponseSenderInterface {
+class ResponseSender implements ResponseSenderInterface {
 	/**
 	 * @inheritdoc
 	 * @param ResponseInterface $response
 	 * @param null|RequestInterface $request
 	 * @throws ResponsSenderException
 	 */
-	public function send(ResponseInterface $response, ?RequestInterface $request = null):void
+	public function sendResponse(ResponseInterface $response, ?RequestInterface $request = null):void
 	{
-		// checking if a reponse is sent
-		if (headers_sent()) {
-			throw new ResponsSenderException("A response has already been sent to the web browser",
-				$this);
-		}
-
 		// making the response compatible with the request
 		if ($request && $response->getProtocolVersion() != $request->getProtocolVersion()) {
 			$response = $response->withProtocolVersion($request->getProtocolVersion());
@@ -57,12 +51,20 @@ class SimpleResponseSender implements ResponseSenderInterface {
 	}
 
 	/**
-	 * Sedns the response headers.
+	 * Sends the response headers.
 	 *
 	 * @param ResponseInterface $response
+	 * @throws ResponsSenderException
 	 */
 	protected function sendResponseHeaders(ResponseInterface $response):void
 	{
+		// checking
+		if (headers_sent()) {
+			throw new ResponsSenderException("A response has already been sent to the web browser",
+				$this);
+		}
+
+		// sending
 		header("HTTP/{$response->getProtocolVersion()} {$response->getStatusCode()} "
 			."{$response->getReasonPhrase()}", true);
 		foreach ($response->getHeaders() as $header => $values) {
