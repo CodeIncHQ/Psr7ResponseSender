@@ -20,7 +20,7 @@
 // Project:  lib-psr7responsesenders
 //
 declare(strict_types = 1);
-namespace CodeInc\PSR7ResponseSender;
+namespace CodeInc\Psr7ResponseSender;
 use Throwable;
 
 

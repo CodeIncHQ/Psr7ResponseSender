@@ -19,10 +19,10 @@
     "hansott/psr7-cookies": "Allows to add cookies into a PSR7 response"
   },
   "autoload": {
-    "psr-4": {"CodeInc\\PSR7ResponseSender\\": "src/"}
+    "psr-4": {"CodeInc\\Psr7ResponseSender\\": "src/"}
   },
   "autoload-dev": {
-    "psr-4": { "CodeInc\\PSR7ResponseSender\\Tests\\": "tests/" }
+    "psr-4": { "CodeInc\\Psr7ResponseSender\\Tests\\": "tests/" }
   },
   "authors": [
     {
