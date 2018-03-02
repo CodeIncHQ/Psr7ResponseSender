@@ -31,6 +31,18 @@ use Psr\Http\Message\ResponseInterface;
  */
 class ResponseSender implements ResponseSenderInterface {
 	/**
+	 * ResponseSender constructor.
+	 *
+	 * @param bool|null $removeNativeHeaders
+	 */
+	public function __construct(bool $removeNativeHeaders = null)
+	{
+		if ($removeNativeHeaders === null || $removeNativeHeaders) {
+			header_register_callback([$this->__construct(), "removeNativeHeaders"]);
+		}
+	}
+
+	/**
 	 * @inheritdoc
 	 * @throws ResponsSenderException
 	 */
@@ -38,6 +50,16 @@ class ResponseSender implements ResponseSenderInterface {
 	{
 		$this->sendResponseHeaders($response);
 		$this->sendReponseBody($response);
+	}
+
+	/**
+	 * Removes all native PHP headers.
+	 */
+	public function removeNativeHeaders():void
+	{
+		foreach (headers_list() as $header) {
+			header_remove(explode(":", $header)[0]);
+		}
 	}
 
 	/**
@@ -53,6 +75,8 @@ class ResponseSender implements ResponseSenderInterface {
 			throw new ResponsSenderException("A response has already been sent to the web browser",
 				$this);
 		}
+
+		// removing php headers
 
 		// sending
 		header("HTTP/{$response->getProtocolVersion()} {$response->getStatusCode()} "
