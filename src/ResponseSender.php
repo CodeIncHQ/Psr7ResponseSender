@@ -31,15 +31,17 @@ use Psr\Http\Message\ResponseInterface;
  */
 class ResponseSender implements ResponseSenderInterface {
 	/**
+	 * @var bool
+	 */
+	private $removeNativeHeaders;
+	/**
 	 * ResponseSender constructor.
 	 *
 	 * @param bool|null $removeNativeHeaders
 	 */
 	public function __construct(bool $removeNativeHeaders = null)
 	{
-		if ($removeNativeHeaders === null || $removeNativeHeaders) {
-			header_register_callback([__CLASS__, "removeNativeHeaders"]);
-		}
+		$this->removeNativeHeaders = $removeNativeHeaders ?? true;
 	}
 
 	/**
@@ -50,16 +52,6 @@ class ResponseSender implements ResponseSenderInterface {
 	{
 		$this->sendResponseHeaders($response);
 		$this->sendReponseBody($response);
-	}
-
-	/**
-	 * Removes all native PHP headers.
-	 */
-	public function removeNativeHeaders():void
-	{
-		foreach (headers_list() as $header) {
-			header_remove(explode(":", $header)[0]);
-		}
 	}
 
 	/**
@@ -76,7 +68,12 @@ class ResponseSender implements ResponseSenderInterface {
 				$this);
 		}
 
-		// removing php headers
+		// removing native headers
+		if ($this->removeNativeHeaders) {
+			foreach (headers_list() as $header) {
+				header_remove(explode(":", $header)[0]);
+			}
+		}
 
 		// sending
 		header("HTTP/{$response->getProtocolVersion()} {$response->getStatusCode()} "
