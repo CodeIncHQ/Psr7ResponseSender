@@ -38,7 +38,7 @@ class ResponseSender implements ResponseSenderInterface {
 	public function __construct(bool $removeNativeHeaders = null)
 	{
 		if ($removeNativeHeaders === null || $removeNativeHeaders) {
-			header_register_callback([$this->__construct(), "removeNativeHeaders"]);
+			header_register_callback([__CLASS__, "removeNativeHeaders"]);
 		}
 	}
 
