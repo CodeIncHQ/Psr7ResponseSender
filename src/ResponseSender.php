@@ -50,18 +50,6 @@ class ResponseSender implements ResponseSenderInterface {
 	 */
 	public function send(ResponseInterface $response):void
 	{
-		$this->sendResponseHeaders($response);
-		$this->sendReponseBody($response);
-	}
-
-	/**
-	 * Sends the response headers.
-	 *
-	 * @param ResponseInterface $response
-	 * @throws ResponsSenderException
-	 */
-	protected function sendResponseHeaders(ResponseInterface $response):void
-	{
 		// checking
 		if (headers_sent()) {
 			throw new ResponsSenderException("A response has already been sent to the web browser",
@@ -81,21 +69,8 @@ class ResponseSender implements ResponseSenderInterface {
 		foreach ($response->getHeaders() as $header => $values) {
 			header("$header: ".implode(", ", $values));
 		}
-	}
 
-	/**
-	 * Sends the response body.
-	 *
-	 * @param ResponseInterface $response
-	 */
-	protected function sendReponseBody(ResponseInterface $response):void
-	{
-		$body = $response->getBody();
-		while (!$body->eof()) {
-			if ($line = \GuzzleHttp\Psr7\readline($body, 1024)) {
-				echo $line;
-				flush();
-			}
-		}
+		// sending the body
+		echo $response->getBody();
 	}
 }
