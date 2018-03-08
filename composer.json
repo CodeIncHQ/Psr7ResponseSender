@@ -1,6 +1,6 @@
 {
-  "name": "codeinchq/lib-psr7responsesender",
-  "version": "1.0.3",
+  "name": "codeinc/lib-psr7responsesender",
+  "version": "1.0.4",
   "description": "Code Inc. PSR-7 response senders",
   "homepage": "https://github.com/CodeIncHQ/lib-psr7responsesender",
   "type": "library",
