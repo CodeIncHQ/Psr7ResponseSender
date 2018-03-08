@@ -21,10 +21,10 @@ $sender->send($response);
 
 ## Installation
 
-This library is available through [Packagist](https://packagist.org/packages/codeinchq/lib-psr7responsesender) and can be installed using [Composer](https://getcomposer.org/): 
+This library is available through [Packagist](https://packagist.org/packages/codeinc/lib-psr7responsesender) and can be installed using [Composer](https://getcomposer.org/): 
 
 ```bash
-composer require codeinchq/lib-psr7responsesender
+composer require codeinc/lib-psr7responsesender
 ```
 
 
@@ -38,6 +38,6 @@ composer require codeinchq/lib-psr7responsesender
 
 
 ## License 
-This library is published under the MIT license (see the [`LICENSE`](https://github.com/codeinchq/lib-gui/blob/master/LICENSE) file).
+This library is published under the MIT license (see the [`LICENSE`](LICENSE) file).
 
 
