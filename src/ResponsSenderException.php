@@ -48,7 +48,7 @@ class ResponsSenderException extends \Exception {
 		?Throwable $previous = null)
 	{
 		$this->responseSender = $responseSender;
-		parent::__construct($message, $code, $previous);
+		parent::__construct($message, $code ?? 0, $previous);
 	}
 
 	/**
