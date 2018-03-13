@@ -28,11 +28,6 @@ composer require codeinc/lib-psr7responsesender
 ```
 
 
-## Dependencies 
-
-* [PHP 7.2](http://php.net/releases/7_2_0.php)
-* [`psr/http-message`](https://packagist.org/packages/psr/http-message) for the standard PSR-7 objects interfaces 
-
 **Recommended library:**
 * the [`hansott/psr7-cookies`](https://packagist.org/packages/hansott/psr7-cookies) library is strongly recommended to add cookies to the PSR-7 responses.
 
