@@ -17,7 +17,7 @@
 // Author:   Joan Fabrégat <joan@codeinc.fr>
 // Date:     23/02/2018
 // Time:     13:45
-// Project:  lib-psr7responsesenders
+// Project:  Psr7ResponseSender
 //
 declare(strict_types = 1);
 namespace CodeInc\Psr7ResponseSender;
