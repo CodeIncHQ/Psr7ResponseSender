@@ -30,47 +30,49 @@ use Psr\Http\Message\ResponseInterface;
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
 class ResponseSender implements ResponseSenderInterface {
-	/**
-	 * @var bool
-	 */
-	private $removeNativeHeaders;
-	/**
-	 * ResponseSender constructor.
-	 *
-	 * @param bool|null $removeNativeHeaders
-	 */
-	public function __construct(bool $removeNativeHeaders = null)
-	{
-		$this->removeNativeHeaders = $removeNativeHeaders ?? true;
-	}
+    /**
+     * @var bool
+     */
+    private $removeNativeHeaders;
+    /**
+     * ResponseSender constructor.
+     *
+     * @param bool|null $removeNativeHeaders
+     */
+    public function __construct(bool $removeNativeHeaders = null)
+    {
+        $this->removeNativeHeaders = $removeNativeHeaders ?? true;
+    }
 
-	/**
-	 * @inheritdoc
-	 * @throws ResponsSenderException
-	 */
-	public function send(ResponseInterface $response):void
-	{
-		// checking
-		if (headers_sent()) {
-			throw new ResponsSenderException("A response has already been sent to the web browser",
-				$this);
-		}
+    /**
+     * @inheritdoc
+     * @throws ResponsSenderException
+     */
+    public function send(ResponseInterface $response):void
+    {
+        // checking
+        if (headers_sent()) {
+            throw new ResponsSenderException("A response has already been sent to the web browser",
+                $this);
+        }
 
-		// removing native headers
-		if ($this->removeNativeHeaders) {
-			foreach (headers_list() as $header) {
-				header_remove(explode(":", $header)[0]);
-			}
-		}
+        // removing native headers
+        if ($this->removeNativeHeaders) {
+            foreach (headers_list() as $header) {
+                header_remove(explode(":", $header)[0]);
+            }
+        }
 
-		// sending
-		header("HTTP/{$response->getProtocolVersion()} {$response->getStatusCode()} "
-			."{$response->getReasonPhrase()}", true);
-		foreach ($response->getHeaders() as $header => $values) {
-			header("$header: ".implode(", ", $values));
-		}
+        // sending
+        header("HTTP/{$response->getProtocolVersion()} {$response->getStatusCode()} "
+            ."{$response->getReasonPhrase()}", true);
+        foreach ($response->getHeaders() as $header => $values) {
+            foreach ($values as $value) {
+                header("$header: $value", false);
+            }
+        }
 
-		// sending the body
-		echo $response->getBody();
-	}
+        // sending the body
+        echo $response->getBody();
+    }
 }
