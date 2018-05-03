@@ -33,15 +33,16 @@ class ResponseSender implements ResponseSenderInterface {
     /**
      * @var bool
      */
-    private $removeNativeHeaders;
+    private $removeNativeHttpHeaders;
+
     /**
      * ResponseSender constructor.
      *
-     * @param bool|null $removeNativeHeaders
+     * @param bool|null $removeNativeHttpHeaders
      */
-    public function __construct(bool $removeNativeHeaders = null)
+    public function __construct(bool $removeNativeHttpHeaders = null)
     {
-        $this->removeNativeHeaders = $removeNativeHeaders ?? true;
+        $this->removeNativeHttpHeaders = $removeNativeHttpHeaders ?? true;
     }
 
     /**
@@ -56,14 +57,31 @@ class ResponseSender implements ResponseSenderInterface {
                 $this);
         }
 
-        // removing native headers
-        if ($this->removeNativeHeaders) {
-            foreach (headers_list() as $header) {
-                header_remove(explode(":", $header)[0]);
-            }
-        }
-
         // sending
+        if ($this->removeNativeHttpHeaders) {
+            $this->remoteNativeHttpHeaders();
+        }
+        $this->sendResponseHttpHeaders($response);
+        $this->sendResponseBody($response);
+    }
+
+    /**
+     * Removes the native PHP HTTP headers.
+     */
+    private function remoteNativeHttpHeaders():void
+    {
+        foreach (headers_list() as $header) {
+            header_remove(explode(":", $header)[0]);
+        }
+    }
+
+    /**
+     * Sends the response HTTP headers.
+     *
+     * @param ResponseInterface $response
+     */
+    private function sendResponseHttpHeaders(ResponseInterface $response):void
+    {
         header("HTTP/{$response->getProtocolVersion()} {$response->getStatusCode()} "
             ."{$response->getReasonPhrase()}", true);
         foreach ($response->getHeaders() as $header => $values) {
@@ -71,8 +89,15 @@ class ResponseSender implements ResponseSenderInterface {
                 header("$header: $value", false);
             }
         }
+    }
 
-        // sending the body
+    /**
+     * Sends the response body.
+     *
+     * @param ResponseInterface $response
+     */
+    private function sendResponseBody(ResponseInterface $response):void
+    {
         if (($resource = $response->getBody()->detach()) !== null) {
             fpassthru($resource);
             fclose($resource);
@@ -81,4 +106,5 @@ class ResponseSender implements ResponseSenderInterface {
             echo $response->getBody()->__toString();
         }
     }
+
 }
