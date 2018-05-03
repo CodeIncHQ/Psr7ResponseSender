@@ -27,11 +27,6 @@ This library is available through [Packagist](https://packagist.org/packages/cod
 composer require codeinc/psr7-response-sender
 ```
 
-
-**Recommended library:**
-* the [`hansott/psr7-cookies`](https://packagist.org/packages/hansott/psr7-cookies) library is strongly recommended to add cookies to the PSR-7 responses.
-
-
 ## License 
 This library is published under the MIT license (see the [`LICENSE`](LICENSE) file).
 

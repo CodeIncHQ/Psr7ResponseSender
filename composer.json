@@ -1,6 +1,6 @@
 {
   "name": "codeinc/psr7-response-sender",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Code Inc. PSR-7 response senders",
   "homepage": "https://github.com/CodeIncHQ/Psr7ResponseSender",
   "type": "library",
@@ -16,7 +16,7 @@
     "guzzlehttp/psr7": "^1.4"
   },
   "suggest": {
-    "hansott/psr7-cookies": "Allows to add cookies into a PSR-7 response"
+    "codeinc/psr7-responses": "A collection of PSR-7 responses"
   },
   "autoload": {
     "psr-4": { "CodeInc\\Psr7ResponseSender\\": "src/" }
