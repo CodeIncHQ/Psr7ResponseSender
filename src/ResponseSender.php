@@ -73,6 +73,12 @@ class ResponseSender implements ResponseSenderInterface {
         }
 
         // sending the body
-        echo $response->getBody();
+        if (($resource = $response->getBody()->detach()) !== null) {
+            fpassthru($resource);
+            fclose($resource);
+        }
+        else {
+            echo $response->getBody()->__toString();
+        }
     }
 }
