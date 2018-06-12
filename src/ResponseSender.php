@@ -3,7 +3,7 @@
 // +---------------------------------------------------------------------+
 // | CODE INC. SOURCE CODE                                               |
 // +---------------------------------------------------------------------+
-// | Copyright (c) 2017 - Code Inc. SAS - All Rights Reserved.           |
+// | Copyright (c) 2017 - 2018 - Code Inc. SAS - All Rights Reserved.    |
 // | Visit https://www.codeinc.fr for more information about licensing.  |
 // +---------------------------------------------------------------------+
 // | NOTICE:  All information contained herein is, and remains the       |
@@ -29,7 +29,8 @@ use Psr\Http\Message\ResponseInterface;
  * @package CodeInc\Psr7ResponseSender
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class ResponseSender implements ResponseSenderInterface {
+class ResponseSender implements ResponseSenderInterface
+{
     /**
      * @var bool
      */
@@ -38,11 +39,11 @@ class ResponseSender implements ResponseSenderInterface {
     /**
      * ResponseSender constructor.
      *
-     * @param bool|null $removeNativeHttpHeaders
+     * @param bool $removeNativeHttpHeaders
      */
-    public function __construct(bool $removeNativeHttpHeaders = null)
+    public function __construct(bool $removeNativeHttpHeaders = true)
     {
-        $this->removeNativeHttpHeaders = $removeNativeHttpHeaders ?? true;
+        $this->removeNativeHttpHeaders = $removeNativeHttpHeaders;
     }
 
     /**
