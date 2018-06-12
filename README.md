@@ -19,6 +19,10 @@ $sender = new ResponseSender();
 $sender->send($response);
 ```
 
+By default `ResponseSender` removes all PHP native HTTP headers. You can change this behavior using the boolean constructor operator or using the methods `removePhpHttpHeaders()` and `sendPhpHttpHeaders()`.   
+
+A second class `GzResponseSender` is provived to send gzip compressed responses using [`ob_start()`](http://php.net/manual/function.ob-start.php) and [`ob_gzhandler()`](http://php.net/manual/function.ob-gzhandler.php)
+
 ## Installation
 
 This library is available through [Packagist](https://packagist.org/packages/codeinc/psr7-response-sender) and can be installed using [Composer](https://getcomposer.org/): 
