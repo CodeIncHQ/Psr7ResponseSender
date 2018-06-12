@@ -21,6 +21,7 @@
 //
 declare(strict_types = 1);
 namespace CodeInc\Psr7ResponseSender;
+use CodeInc\HttpReasonPhraseLookup\HttpReasonPhraseLookup;
 use Psr\Http\Message\ResponseInterface;
 
 
@@ -35,55 +36,32 @@ class ResponseSender implements ResponseSenderInterface
     /**
      * @var bool
      */
-    private $removePhpHeaders;
-
-    /**
-     * @var
-     */
-    private $enableGzCompression;
+    private $removePhpHttpHeaders;
 
     /**
      * ResponseSender constructor.
      *
-     * @param bool $removePhpHeaders
-     * @param bool $enableGzCompression
+     * @param bool $removePhpHttpHeaders
      */
-    public function __construct(bool $removePhpHeaders = true, bool $enableGzCompression = false)
+    public function __construct(bool $removePhpHttpHeaders = true)
     {
-        $this->removePhpHeaders = $removePhpHeaders;
-        $this->enableGzCompression = $enableGzCompression;
-    }
-
-    /**
-     * Enables the GZ compression of the body.
-     */
-    public function enableGzCompression():void
-    {
-        $this->enableGzCompression = true;
-    }
-
-    /**
-     * Disables the GZ compression of the body.
-     */
-    public function disableGzCompression():void
-    {
-        $this->enableGzCompression = false;
+        $this->removePhpHttpHeaders = $removePhpHttpHeaders;
     }
 
     /**
      * Removes all the native PHP HTTP headers. Only sends the headers included in the PSR-7 response object.
      */
-    public function removePhpHeaders():void
+    public function removePhpHttpHeaders():void
     {
-        $this->removePhpHeaders = true;
+        $this->removePhpHttpHeaders = true;
     }
 
     /**
      * Sends all the native PHP HTTP headers and headers included in the PSR-7 response object.
      */
-    public function sendPhpHeaders():void
+    public function sendPhpHttpHeaders():void
     {
-        $this->removePhpHeaders = false;
+        $this->removePhpHttpHeaders = false;
     }
 
     /**
@@ -92,8 +70,8 @@ class ResponseSender implements ResponseSenderInterface
      */
     public function send(ResponseInterface $response):void
     {
-        $this->sendHttpHeaders($response);
-        $this->sendBody($response);
+        $this->sendResponseHttpHeaders($response);
+        $this->sendResponseBody($response);
     }
 
     /**
@@ -102,7 +80,7 @@ class ResponseSender implements ResponseSenderInterface
      * @param ResponseInterface $response
      * @throws ResponsSenderException
      */
-    public function sendHttpHeaders(ResponseInterface $response):void
+    public function sendResponseHttpHeaders(ResponseInterface $response):void
     {
         // checking
         if (headers_sent()) {
@@ -111,16 +89,63 @@ class ResponseSender implements ResponseSenderInterface
         }
 
         // removing PHP native HTTP headers (if enabled)
-        if ($this->removePhpHeaders) {
+        if ($this->removePhpHttpHeaders) {
             foreach (headers_list() as $header) {
                 header_remove(explode(":", $header)[0]);
             }
         }
 
         // sending response HTTP headers
-        header("HTTP/{$response->getProtocolVersion()} {$response->getStatusCode()} "
-            ."{$response->getReasonPhrase()}", true);
+        $this->sendHttpVersionHeader(
+            $response->getProtocolVersion(),
+            $response->getStatusCode(),
+            $response->getReasonPhrase()
+        );
+        $this->sendHttpHeaders($this->listResponseHeaders($response));
+    }
+
+    /**
+     * Returns the list of all the headers of a PSR-7 response.
+     *
+     * @param ResponseInterface $response
+     * @return \Generator
+     */
+    protected function listResponseHeaders(ResponseInterface $response):\Generator
+    {
         foreach ($response->getHeaders() as $header => $values) {
+            foreach ($values as $value) {
+                yield $header => $value;
+            }
+        }
+    }
+
+    /**
+     * Sends the HTTP version header.
+     *
+     * @param string $protocolVersion
+     * @param int $statusCode
+     * @param null|string $reasonPhrase
+     */
+    protected function sendHttpVersionHeader(string $protocolVersion, int $statusCode,
+        ?string $reasonPhrase = null):void
+    {
+        header(
+            sprintf("HTTP/%s %d %s",
+                $protocolVersion,
+                $statusCode,
+                $reasonPhrase ?? HttpReasonPhraseLookup::getReasonPhrase($statusCode)),
+            true
+        );
+    }
+
+    /**
+     * Sends multiple HTTP headers.
+     *
+     * @param iterable $headers
+     */
+    protected function sendHttpHeaders(iterable $headers):void
+    {
+        foreach ($headers as $header => $values) {
             foreach ($values as $value) {
                 header("$header: $value", false);
             }
@@ -128,21 +153,31 @@ class ResponseSender implements ResponseSenderInterface
     }
 
     /**
-     * Sends the response body.
+     * Sends a response's body.
      *
      * @param ResponseInterface $response
      */
-    public function sendBody(ResponseInterface $response):void
+    public function sendResponseBody(ResponseInterface $response):void
     {
-        if ($this->enableGzCompression) {
-            ob_start('ob_gzhandler');
+        if (($body = $response->getBody()->detach()) === null) {
+            $body = $response->getBody()->__toString();
         }
-        if (($resource = $response->getBody()->detach()) !== null) {
-            fpassthru($resource);
-            fclose($resource);
+        $this->sendBody($body);
+    }
+
+    /**
+     * Sends the body.
+     *
+     * @param $body
+     */
+    protected function sendBody($body):void
+    {
+        if (is_resource($body)) {
+            fpassthru($body);
+            fclose($body);
         }
         else {
-            echo $response->getBody()->__toString();
+            echo $body;
         }
     }
 
