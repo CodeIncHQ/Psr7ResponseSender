@@ -19,6 +19,8 @@ $sender = new ResponseSender();
 $sender->send($response);
 ```
 
+`ResponseSender` constructor accepts two boolean parameters. The first enables or disables the transmission of the native PHP HTTP headers on the top of the headers included in the PSR-7 response object. The second enables or disables the GZ compression of the body (using [`ob_start()`](http://php.net/manual/function.ob-start.php) and [`ob_gzhanlder()`](http://php.net/manual/function.ob-gzhandler.php))   
+
 ## Installation
 
 This library is available through [Packagist](https://packagist.org/packages/codeinc/psr7-response-sender) and can be installed using [Composer](https://getcomposer.org/): 
