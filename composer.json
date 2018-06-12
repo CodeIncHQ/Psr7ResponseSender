@@ -13,7 +13,8 @@
   "require-dev": {
     "phpunit/phpunit": "^7",
     "hansott/psr7-cookies": "^1.0",
-    "guzzlehttp/psr7": "^1.4"
+    "guzzlehttp/psr7": "^1.4",
+    "codeinc/middleware-test-kit": "^1.0"
   },
   "suggest": {
     "codeinc/psr7-responses": "A collection of PSR-7 responses"
