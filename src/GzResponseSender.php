@@ -29,6 +29,8 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @package CodeInc\Psr7ResponseSender
  * @author  Joan Fabrégat <joan@codeinc.fr>
+ * @link https://github.com/CodeIncHQ/Psr7ResponseSender
+ * @license MIT <https://github.com/CodeIncHQ/Psr7ResponseSender/blob/master/LICENSE>
  */
 class GzResponseSender extends ResponseSender
 {
