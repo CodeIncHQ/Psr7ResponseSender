@@ -19,7 +19,9 @@ $sender = new ResponseSender();
 $sender->send($response);
 ```
 
-`ResponseSender` constructor accepts two boolean parameters. The first enables or disables the transmission of the native PHP HTTP headers on the top of the headers included in the PSR-7 response object. The second enables or disables the GZ compression of the body (using [`ob_start()`](http://php.net/manual/function.ob-start.php) and [`ob_gzhanlder()`](http://php.net/manual/function.ob-gzhandler.php))   
+By default `ResponseSender` removes all PHP native HTTP headers. You can change this behavior using the boolean constructor operator or using the methods `removePhpHttpHeaders()` and `sendPhpHttpHeaders()`.   
+
+A second class `GzResponseSender` is provived to send gzip compressed responses using [`ob_start()`](http://php.net/manual/function.ob-start.php) and [`ob_gzhandler()`](http://php.net/manual/function.ob-gzhandler.php)
 
 ## Installation
 
