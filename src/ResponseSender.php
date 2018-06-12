@@ -147,10 +147,8 @@ class ResponseSender implements ResponseSenderInterface
      */
     protected function sendHttpHeaders(iterable $headers):void
     {
-        foreach ($headers as $header => $values) {
-            foreach ($values as $value) {
-                header("$header: $value", false);
-            }
+        foreach ($headers as $header => $value) {
+            header("$header: $value", false);
         }
     }
 
