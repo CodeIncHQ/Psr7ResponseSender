@@ -41,8 +41,25 @@ class GzResponseSender extends ResponseSender
         'text/html',
         'text/plain',
         'text/css',
+        'text/csv',
+        'text/xml',
         'application/javascript',
-        'application/json'
+        'application/json',
+        'application/xml',
+        'application/rss+xml',
+        'application/vnd.ms-fontobject',
+        'application/x-font',
+        'application/x-font-opentype',
+        'application/x-font-otf',
+        'application/x-font-truetype',
+        'application/x-font-ttf',
+        'application/x-javascript',
+        'application/xhtml+xml',
+        'font/opentype',
+        'font/otf',
+        'font/ttf',
+        'image/svg+xml',
+        'image/x-icon',
     ];
 
     /**
