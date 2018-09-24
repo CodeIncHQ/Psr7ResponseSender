@@ -68,7 +68,7 @@ class ResponseSender implements ResponseSenderInterface
 
     /**
      * @inheritdoc
-     * @throws ResponsSenderException
+     * @throws ResponseSenderException
      */
     public function send(ResponseInterface $response):void
     {
@@ -80,13 +80,13 @@ class ResponseSender implements ResponseSenderInterface
      * Sends the response HTTP headers.
      *
      * @param ResponseInterface $response
-     * @throws ResponsSenderException
+     * @throws ResponseSenderException
      */
     public function sendResponseHttpHeaders(ResponseInterface $response):void
     {
         // checking
         if (headers_sent()) {
-            throw new ResponsSenderException("A response has already been sent to the web browser",
+            throw new ResponseSenderException("A response has already been sent to the web browser",
                 $this);
         }
 
