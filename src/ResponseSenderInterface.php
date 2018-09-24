@@ -30,7 +30,8 @@ use Psr\Http\Message\ResponseInterface;
  * @package CodeInc\Psr7ResponseSender
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-interface ResponseSenderInterface {
+interface ResponseSenderInterface
+{
 	/**
 	 * Sends a reponse to the web browser.
 	 *

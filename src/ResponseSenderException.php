@@ -30,7 +30,8 @@ use Throwable;
  * @package CodeInc\Psr7ResponseSender
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class ResponsSenderException extends \Exception {
+class ResponseSenderException extends \Exception
+{
 	/**
 	 * @var ResponseSenderInterface
 	 */
