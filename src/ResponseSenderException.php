@@ -25,25 +25,26 @@ use Throwable;
 
 
 /**
- * Class ResponsSenderException
+ * Class ResponseSenderException
  *
  * @package CodeInc\Psr7ResponseSender
  * @author Joan Fabrégat <joan@codeinc.fr>
  */
-class ResponsSenderException extends \Exception {
+class ResponseSenderException extends \Exception
+{
 	/**
 	 * @var ResponseSenderInterface
 	 */
 	private $responseSender;
 
-	/**
-	 * ResponsSenderException constructor.
-	 *
-	 * @param string $message
-	 * @param ResponseSenderInterface $responseSender
-	 * @param int|null $code
-	 * @param null|Throwable $previous
-	 */
+    /**
+     * ResponseSenderException constructor.
+     *
+     * @param string $message
+     * @param ResponseSenderInterface $responseSender
+     * @param int|null $code
+     * @param null|Throwable $previous
+     */
 	public function __construct(string $message, ResponseSenderInterface $responseSender, ?int $code = null,
 		?Throwable $previous = null)
 	{

@@ -90,7 +90,7 @@ class GzResponseSender extends ResponseSender
     /**
      * @inheritdoc
      * @param ResponseInterface $response
-     * @throws ResponsSenderException
+     * @throws ResponseSenderException
      */
     public function send(ResponseInterface $response):void
     {
@@ -107,7 +107,7 @@ class GzResponseSender extends ResponseSender
     /**
      * @inheritdoc
      * @param ResponseInterface $response
-     * @throws ResponsSenderException
+     * @throws ResponseSenderException
      */
     public function sendGzResponseHttpHeaders(ResponseInterface $response):void
     {
